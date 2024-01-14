@@ -17,24 +17,22 @@ jobs:
         node-version: 18
     - name: Install commitlint
       run: |
-        npm install conventional-changelog-conventionalcommits
-        npm install commitlint@latest
-    
-    # - name: Install dependancies and build
-    #   run: |
-    #         if [ -f package.json ]; then
-    #             npm ci
-    #             npm run build
-    #         else
-    #             echo "package.json not found, skipping build step"
-    #         fi
-    #   shell: bash
+        sudo npm i -g @commitlint/cli @commitlint/config-conventional
+        alias commitlint='commitlint --extends "@commitlint/config-conventional"'
+
+    - name: Install dependancies and build
+      run: |
+            if [ -f package.json ]; then
+                npm ci
+                npm run build
+            else
+                echo "package.json not found, skipping build step"
+            fi
+      shell: bash
 
     - name: Validate commit messages
       if: github.event_name == 'push'
-      run: |
-        echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
-        npx commitlint --from HEAD~1 --to HEAD --verbose
+      run: npx commitlint --from HEAD~1 --to HEAD --verbose
 
     - name: Validate PR commits with commitlint
       if: github.event_name == 'pull_request'
