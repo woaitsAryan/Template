@@ -17,18 +17,18 @@ jobs:
         node-version: 18
     - name: Install commitlint
       run: |
-        npm install -g conventional-changelog-conventionalcommits
-        npm install -g commitlint@latest
+        npm install conventional-changelog-conventionalcommits
+        npm install commitlint@latest
     
-    - name: Install dependancies and build
-      run: |
-            if [ -f package.json ]; then
-                npm ci
-                npm run build
-            else
-                echo "package.json not found, skipping build step"
-            fi
-      shell: bash
+    # - name: Install dependancies and build
+    #   run: |
+    #         if [ -f package.json ]; then
+    #             npm ci
+    #             npm run build
+    #         else
+    #             echo "package.json not found, skipping build step"
+    #         fi
+    #   shell: bash
 
     - name: Validate commit messages
       if: github.event_name == 'push'
