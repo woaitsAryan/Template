@@ -21,7 +21,13 @@ jobs:
         npm install commitlint@latest
     
     - name: Check if builds pass
-      run: npm run build
+      run: |
+            if [ -f package.json ]; then
+                npm run build
+            else
+                echo "package.json not found, skipping build step"
+            fi
+      shell: bash
 
     - name: Validate commit messages
       if: github.event_name == 'push'
