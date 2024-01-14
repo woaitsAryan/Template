@@ -1,9 +1,7 @@
 name: Continous integration
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+
+on: [push, pull_request]
+
 jobs:
   build_and_lint:
     timeout-minutes: 30
