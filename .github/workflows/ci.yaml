@@ -15,8 +15,8 @@ jobs:
         node-version: 18
     - name: Install commitlint
       run: |
-        npm install conventional-changelog-conventionalcommits
-        npm install commitlint@latest
+        npm install -g conventional-changelog-conventionalcommits
+        npm install -g commitlint@latest
     
     - name: Install dependancies and build
       run: |
